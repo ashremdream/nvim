@@ -110,6 +110,8 @@ func! CompileRunGcc()
     exec "MarkdownPreview"
   elseif &filetype == 'vimwiki'
     exec "MarkdownPreview"
+  elseif &filetype == 'vim'
+    exec "source %"
   endif
 endfunc
 
@@ -117,6 +119,9 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sickill/vim-monokai'
+Plug 'connorholyday/vim-snazzy'
 Plug 'joshdick/onedark.vim'
 "UI
 Plug 'mhinz/vim-startify'
@@ -151,6 +156,7 @@ Plug 'theniceboy/vim-calc'
 Plug 'liuchengxu/vista.vim'
 
 "Complete
+Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'junegunn/vim-easy-align'
@@ -329,6 +335,7 @@ nmap <LEADER>w :CocCommand explorer<CR>
 
 
 let g:onedark_termcolors=256
+let g:onedark_terminal_italics=1
 colorscheme onedark
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -347,7 +354,7 @@ if (empty($TMUX))
 endif
 
 
-let g:airline_theme='base16_classic'
+let g:airline_theme='dracula'
 
 "===
 "=== NERDTree
@@ -638,4 +645,30 @@ let g:EasyMotion_smartcase = 1
 let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
+
+"===
+"=== rainbow
+"===
+	let g:rainbow_conf = {
+	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	\	'operators': '_,_',
+	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	\	'separately': {
+	\		'*': {},
+	\		'tex': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+	\		},
+	\		'lisp': {
+	\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+	\		},
+	\		'vim': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+	\		},
+	\		'html': {
+	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+	\		},
+	\		'css': 0,
+	\	}
+	\}
 
